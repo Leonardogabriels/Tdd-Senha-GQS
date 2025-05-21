@@ -14,6 +14,12 @@ public class ValidadorSenha {
         if (!temDoisDigitos(senha)) {
             erros.add("A senha deve conter pelo menos 2 dígitos");
         }
+        if (!temLetraMaiuscula(senha)) {
+            erros.add("A senha deve conter pelo menos uma letra maiuscula");
+        }
+        if (!temCaractereEspecial(senha)) {
+            erros.add("A senha deve conter pelo menos um caractere especial");
+        }
 
         return new ResultadoValidacao(erros.isEmpty(), erros);
     }
@@ -30,4 +36,7 @@ public class ValidadorSenha {
         return senha.chars().anyMatch(Character::isUpperCase);
     }
 
+    private boolean temCaractereEspecial(String senha) {
+        return senha.chars().anyMatch(ch -> "!@#$%^&*()-_=+[]{}|;:'\",.<>?/".indexOf(ch) >= 0);
+    }
 }
